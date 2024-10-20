@@ -80,6 +80,9 @@ app.post('/register', async (req, res) => {
     } catch (error) {
         console.error('Error during registration:', error);
         res.status(500).json({ error: 'Internal server error' });
+    } catch (error) {
+        console.error('Registration error:', error);
+        res.status(400).json({ message: 'Registration failed. Please try again.' });
     }
 });
 
