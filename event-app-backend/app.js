@@ -10,8 +10,17 @@ import { dbConfig } from './config.js';
 const { Pool } = pkg; // Using Pool for PostgreSQL
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
+app.listen(PORT, (err) => {
+    if (err) {
+      console.error('Error starting server:', err);
+      process.exit(1);
+    } else {
+      console.log(`Server is running on port ${PORT}`);
+    }
+  });
+  
 // Middleware
 app.use(cors()); // Enable CORS for all origins
 app.use(express.json()); // Middleware to parse JSON bodies
