@@ -8,7 +8,10 @@ import { dbConfig } from './config.js';
 
 
 const { Pool } = pkg; // Using Pool for PostgreSQL
-
+// Create a new Pool instance using the DATABASE_URL from the environment
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from your .env file
+});
 const app = express();
 const PORT = process.env.PORT || 3001;
 
