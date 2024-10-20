@@ -1,4 +1,9 @@
-venv/
+# Ignore node_modules directory in root and subdirectories
 node_modules/
-echo "venv/" >> .gitignore
-echo "node_modules/" >> .gitignore
+event-app-backend/node_modules/
+
+# Ignore virtual environment directory
+venv/
+
+# Ignore environment variables file
+.env
