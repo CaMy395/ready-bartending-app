@@ -36,18 +36,23 @@ const Register = () => {
             const text = await response.text(); // Get the response as text
             console.log('Raw Response:', text); // Log the raw response
     
-            const data = JSON.parse(text); // Now parse the text as JSON
+            // Check if the response is not empty before parsing
+            if (text) {
+                const data = JSON.parse(text); // Now parse the text as JSON
     
-            if (response.ok) {
-                setSuccessMessage('Registration successful! You can now log in.');
-                setFormData({
-                    username: '',
-                    email: '',
-                    password: '',
-                    role: 'user', // Reset to default
-                });
+                if (response.ok) {
+                    setSuccessMessage('Registration successful! You can now log in.');
+                    setFormData({
+                        username: '',
+                        email: '',
+                        password: '',
+                        role: 'user', // Reset to default
+                    });
+                } else {
+                    setErrorMessage(data.message || 'Registration failed. Please try again.');
+                }
             } else {
-                setErrorMessage(data || 'Registration failed. Please try again.');
+                setErrorMessage('Empty response from server. Please try again.');
             }
         } catch (error) {
             console.error('Error during registration:', error);
@@ -55,7 +60,7 @@ const Register = () => {
         }
     };
     
-
+    
     return (
         <div>
             <h1>Register</h1>
