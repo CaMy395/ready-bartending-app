@@ -20,8 +20,8 @@ const PORT = process.env.PORT || 3001;
 app.get('/', (req, res) => {
     res.send('Welcome to the Ready Bartending App!');
 });
-const express = require('express');
-const cors = require('cors');
+//const express = require('express');
+//const cors = require('cors');
 
 
 // Allow requests from specific origins
