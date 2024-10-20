@@ -24,7 +24,7 @@ const Register = () => {
         setErrorMessage(''); // Reset error message
         setSuccessMessage(''); // Reset success message
         try {
-            const response = await fetch('http://localhost:3001/register', {
+            const response = await fetch('http://ready-bartending-gigs-portal.com/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
