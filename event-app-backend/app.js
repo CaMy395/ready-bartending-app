@@ -12,6 +12,11 @@ const { Pool } = pkg; // Using Pool for PostgreSQL
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Ready Bartending App!');
+});
+
+
 // Middleware
 app.use(cors()); // Enable CORS for all origins
 app.use(express.json()); // Middleware to parse JSON bodies
