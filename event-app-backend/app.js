@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import pkg from 'pg';
 import bcrypt from 'bcrypt';
-import { dbConfig } from './config.js';
+//import { dbConfig } from './config.js';
 
 
 const { Pool } = pkg; // Using Pool for PostgreSQL
@@ -39,6 +39,37 @@ app.use(express.json()); // Middleware to parse JSON bodies
         console.error('Connection error', err.stack);
     }
 })();
+
+// POST endpoint for registration
+app.post('/register', async (req, res) => {
+    const { username, email, password, role } = req.body; // Get the data from the request body
+
+    try {
+        // Check if the username or email already exists
+        const existingUser = await pool.query('SELECT * FROM users WHERE username = $1 OR email = $2', [username, email]);
+        
+        if (existingUser.rowCount > 0) {
+            return res.status(400).json({ error: 'Username or email already exists' });
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Insert the new user into the database
+        const newUser = await pool.query(
+            'INSERT INTO users (username, email, password, role) VALUES ($1, $2, $3, $4) RETURNING *',
+            [username, email, hashedPassword, role]
+        );
+
+        // Respond with the newly created user (excluding the password)
+        const { password: _, ...userWithoutPassword } = newUser.rows[0];
+        res.status(201).json(userWithoutPassword);
+    } catch (error) {
+        console.error('Error during registration:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
 
 // POST endpoint for login
 app.post('/login', async (req, res) => {
