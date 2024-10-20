@@ -36,7 +36,7 @@ const Register = () => {
             const text = await response.text(); // Get the response as text
             console.log('Raw Response:', text); // Log the raw response
     
-            //const data = JSON.parse(text); // Now parse the text as JSON
+            const data = JSON.parse(text); // Now parse the text as JSON
     
             if (response.ok) {
                 setSuccessMessage('Registration successful! You can now log in.');
