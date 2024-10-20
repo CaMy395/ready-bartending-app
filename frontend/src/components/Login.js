@@ -5,13 +5,15 @@ const Login = ({ onLogin }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false); // Loading state
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true
 
         try {
-            const response = await fetch('https://ready-bartending-gigs-portal.onrender.com', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, { // Using environment variable for API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -37,10 +39,12 @@ const Login = ({ onLogin }) => {
                 }
             } else {
                 const errorText = await response.text();
-                setError(errorText);
+                setError(errorText || 'Login failed. Please check your credentials.'); // More user-friendly error message
             }
         } catch (err) {
-            setError('Something went wrong. Please try again later.');
+            setError('Something went wrong. Please try again later.'); // Generic error message
+        } finally {
+            setLoading(false); // Reset loading state
         }
     };
 
@@ -68,7 +72,9 @@ const Login = ({ onLogin }) => {
                 />
             </label>
             <br />
-            <button type="submit">Login</button>
+            <button type="submit" disabled={loading}> {/* Disable button during loading */}
+                {loading ? 'Logging in...' : 'Login'} {/* Change button text */}
+            </button>
         </form>
     );
 };
