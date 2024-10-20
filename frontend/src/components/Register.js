@@ -1,4 +1,4 @@
-    // src/components/Register.js
+// src/components/Register.js
 import React, { useState } from 'react';
 
 const Register = () => {
@@ -24,7 +24,7 @@ const Register = () => {
         setErrorMessage(''); // Reset error message
         setSuccessMessage(''); // Reset success message
         try {
-            const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/register', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, { // Updated to use environment variable
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ const Register = () => {
             <h1>Register</h1>
             <form onSubmit={handleSubmit}>
                 <label>
-                    username:
+                    Username:
                     <input
                         type="text"
                         name="username"
