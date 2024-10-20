@@ -10,7 +10,7 @@ import { dbConfig } from './config.js';
 const { Pool } = pkg; // Using Pool for PostgreSQL
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.POR || 3001;
 
 app.listen(PORT, (err) => {
     if (err) {
