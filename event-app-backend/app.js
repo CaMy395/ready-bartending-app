@@ -20,10 +20,20 @@ const PORT = process.env.PORT || 3001;
 app.get('/', (req, res) => {
     res.send('Welcome to the Ready Bartending App!');
 });
+const express = require('express');
+const cors = require('cors');
 
 
-// Middleware
-app.use(cors({origin:'https:ready-bartendings-gig-portal.onrender.com'})); // Enable CORS for all origins
+// Allow requests from specific origins
+const allowedOrigins = ['https://ready-bartendings-gig-portal.onrender.com']; // Add your front-end URL here
+
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+}));
+
+
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // PostgreSQL connection setup
