@@ -8,10 +8,12 @@ import { dbConfig } from './config.js';
 
 
 const { Pool } = pkg; // Using Pool for PostgreSQL
+
 // Create a new Pool instance using the DATABASE_URL from the environment
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from your .env file
 });
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -26,7 +28,7 @@ app.use(express.json()); // Middleware to parse JSON bodies
 
 // PostgreSQL connection setup
 // Use dbConfig in your PostgreSQL pool setup
-const pool = new Pool(dbConfig);
+//const pool = new Pool(dbConfig);
 
 // Test database connection
 (async () => {
