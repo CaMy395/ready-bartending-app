@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
 
 
 // Middleware
-app.use(cors()); // Enable CORS for all origins
+app.use(cors({origin:'https:ready-bartendings-gig-portal.onrender.com'})); // Enable CORS for all origins
 app.use(express.json()); // Middleware to parse JSON bodies
 
 // PostgreSQL connection setup
