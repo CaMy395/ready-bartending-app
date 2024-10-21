@@ -13,7 +13,7 @@ const { Pool } = pkg; // Using Pool for PostgreSQL
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from your .env file
     ssl:{
-        rejectUnauthorized: true
+        rejectUnauthorized: false
     }
 });
 
