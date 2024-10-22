@@ -11,9 +11,10 @@ const Login = ({ onLogin }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Set loading to true
+        console.log(process.env.REACT_APP_API_URL);
 
         try {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, { // Using environment variable for API URL
+            const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/login',{ // Using environment variable for API URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
