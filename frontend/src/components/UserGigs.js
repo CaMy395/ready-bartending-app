@@ -13,7 +13,7 @@ const UserGigs = () => {
     // Fetch gigs from the server
     const fetchGigs = async () => {
         try {
-            const response = await fetch('http://localhost:3001/gigs');
+            const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/gigs');
             if (!response.ok) {
                 throw new Error('Failed to fetch gigs');
             }
@@ -30,7 +30,7 @@ const UserGigs = () => {
         const action = isClaimed ? 'unclaim' : 'claim'; // Determine action based on current state
 
         try {
-            const response = await fetch(`http://localhost:3001/gigs/${gigId}/${action}`, {
+            const response = await fetch(`https://ready-bartending-gigs-portal.onrender.com/gigs/${gigId}/${action}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username }), // Correctly send username

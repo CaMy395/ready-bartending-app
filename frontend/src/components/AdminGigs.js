@@ -25,7 +25,7 @@ const AdminGigs = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('https://ready-bartending-gigs-portal.onrender.com'); // Adjust the URL as needed
+                const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/users'); // Adjust the URL as needed
                 if (response.ok) {
                     const data = await response.json();
                     setUsers(data);
@@ -39,7 +39,7 @@ const AdminGigs = () => {
 
         const fetchGigs = async () => {
             try {
-                const response = await fetch('http://localhost:3001/gigs'); // Adjust the URL as needed
+                const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/gigs'); // Adjust the URL as needed
                 if (response.ok) {
                     const data = await response.json();
                     setGigs(data);
@@ -89,7 +89,7 @@ const AdminGigs = () => {
         console.log('Gig Data:', gigData); // Log the gig data being sent
     
         try {
-            const response = await fetch('http://localhost:3001/gigs', {
+            const response = await fetch('https://ready-bartending-gigs-portal.onrender.com/gigs', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
