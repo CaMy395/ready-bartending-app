@@ -55,7 +55,7 @@ const UserGigs = () => {
         const action = isBackupClaimed ? 'unclaim-backup' : 'claim-backup'; // Correctly use action
 
         try {
-            const response = await fetch(`http://localhost:3001/gigs/${gigId}/${action}`, {
+            const response = await fetch(`https://ready-bartending-gigs-portal.onrender.com/gigs/${gigId}/${action}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username }), // Correctly send username

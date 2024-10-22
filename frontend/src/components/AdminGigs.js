@@ -25,7 +25,7 @@ const AdminGigs = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch('http://localhost:3001/users'); // Adjust the URL as needed
+                const response = await fetch('https://ready-bartending-gigs-portal.onrender.com'); // Adjust the URL as needed
                 if (response.ok) {
                     const data = await response.json();
                     setUsers(data);
