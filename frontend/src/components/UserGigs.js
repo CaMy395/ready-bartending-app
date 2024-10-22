@@ -56,7 +56,7 @@ const UserGigs = () => {
 
         try {
             const response = await fetch(`https://ready-bartending-gigs-portal.onrender.com/gigs/${gigId}/${action}`, {
-                method: 'PATCH',
+                method: 'PATCH,POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username }), // Correctly send username
             });

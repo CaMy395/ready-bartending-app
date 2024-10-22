@@ -28,11 +28,11 @@ app.get('/', (req, res) => {
 
 
 // Allow requests from specific origins
-const allowedOrigins = ['https://ready-bartendings-gig-portal.onrender.com']; // Add your front-end URL here
+//const allowedOrigins = [];  Add your front-end URL here
 
 app.use(cors({
-    origin: allowedOrigins,
-    methods: ['GET', 'POST'],
+    origin: 'https://ready-bartendings-gig-portal.onrender.com',
+    methods: ['GET', 'POST','PATCH'],
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }));
 
