@@ -13,7 +13,7 @@ const { Pool } = pkg; // Using Pool for PostgreSQL
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL, // Use the DATABASE_URL from your .env file
     ssl:{
-        rejectUnauthorized: false
+        rejectUnauthorized: true
     }
 });
 
@@ -86,6 +86,7 @@ app.post('/register', async (req, res) => {
 
 // POST endpoint for login
 app.post('/login', async (req, res) => {
+    console.log('Login request received:')
     const { username, password } = req.body; // Get the username and password from the request body
 
     try {
