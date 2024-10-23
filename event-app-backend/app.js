@@ -20,6 +20,11 @@ const pool = new Pool({
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Serve static frontend files if in production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/build')));
+}
+
 app.get('/', (req, res) => {
     res.send('Welcome to the Ready Bartending App!');
 });
@@ -352,6 +357,11 @@ app.patch('/gigs/:id/unclaim-backup', async (req, res) => {
         console.error('Error unclaiming backup for gig:', error);
         res.status(500).json({ error: 'Server error' });
     }
+});
+
+// Catch-all route for serving React frontend
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
 
 
