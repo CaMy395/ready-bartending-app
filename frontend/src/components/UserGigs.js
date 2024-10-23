@@ -83,7 +83,7 @@ const UserGigs = () => {
             <ul>
                 {gigs.map((gig) => {
                     console.log('Gig Date:', gig.date); // Log the date to check its format
-                    
+
                     // Format the date using string parsing with 'T00:00:00' appended
                     const formattedDate = new Date(gig.date + 'T00:00:00').toLocaleDateString('en-US', {
                         year: 'numeric',
@@ -107,16 +107,16 @@ const UserGigs = () => {
                             
                             <button
                                 className="claim-button"
-                                onClick={() => toggleClaimGig(gig.id, isClaimed)}
+                                onClick={() => toggleClaimGig(gig.id, gig.claimed_usernames?.includes(username))}
                             >
-                                {isClaimed ? 'Unclaim Gig' : 'Claim Gig'}
+                                {gig.claimed_usernames?.includes(username) ? 'Unclaim Gig' : 'Claim Gig'}
                             </button>
                             
                             <button
                                 className="backup-button"
-                                onClick={() => toggleClaimBackup(gig.id, isBackupClaimed)}
+                                onClick={() => toggleClaimBackup(gig.id, gig.backup_claimed_by?.includes(username))}
                             >
-                                {isBackupClaimed ? 'Unclaim Backup Gig' : 'Claim Backup Gig'}
+                                {gig.backup_claimed_by?.includes(username) ? 'Unclaim Backup Gig' : 'Claim Backup Gig'}
                             </button>
                         </li>
                     );
