@@ -1,4 +1,5 @@
 // src/components/AdminGigs.js
+// src/components/AdminGigs.js
 import React, { useState, useEffect } from 'react';
 
 const AdminGigs = () => {
@@ -112,7 +113,7 @@ const AdminGigs = () => {
             console.error('Error adding gig:', error);
         }
     };
-    
+
     const formatGigDate = (dateString) => {
         return new Date(dateString + 'T00:00:00').toLocaleDateString('en-US', {
             year: 'numeric',
@@ -227,14 +228,14 @@ const AdminGigs = () => {
             <ul>
                 {gigs.map((gig) => {
                     // Format the date
-                    const formatedDate = formatGigDate(gig.date);
+                    const formattedDate = formatGigDate(gig.date);
                    
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
-                            <p className="gig-info">Position:{gig.position}</p>
+                            <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {formatedDate}</p> {/* Use formatted date */}
+                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
