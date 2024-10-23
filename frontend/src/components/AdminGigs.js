@@ -1,6 +1,13 @@
 // src/components/AdminGigs.js
 import React, { useState, useEffect } from 'react';
 
+const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':');
+    const hoursIn12 = hours % 12 || 12; // Convert to 12-hour format
+    const ampm = hours >= 12 ? 'PM' : 'AM'; // Determine AM/PM
+    return `${hoursIn12}:${minutes} ${ampm}`; // Format as "HH:MM AM/PM"
+};
+
 const AdminGigs = () => {
     const [newGig, setNewGig] = useState({
         client: '',
@@ -224,13 +231,15 @@ const AdminGigs = () => {
                         day: 'numeric', // Day of the month
                     });
 
+                    const formattedTime = formatTime(gig.time);
+
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
                             <p className="gig-info">Date: {formattedDate}</p> {/* Use the formatted date */}
-                            <p className="gig-info">Time: {gig.time}</p>
+                            <p className="gig-info">Time: {formattedTime}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>

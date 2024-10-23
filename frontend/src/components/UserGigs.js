@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+const formatTime = (timeString) => {
+    const [hours, minutes] = timeString.split(':');
+    const hoursIn12 = hours % 12 || 12; // Convert to 12-hour format
+    const ampm = hours >= 12 ? 'PM' : 'AM'; // Determine AM/PM
+    return `${hoursIn12}:${minutes} ${ampm}`; // Format as "HH:MM AM/PM"
+};
+
 const UserGigs = () => {
     const [gigs, setGigs] = useState([]);
     const [error, setError] = useState(null);
@@ -82,7 +89,6 @@ const UserGigs = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <ul>
                 {gigs.map((gig) => {
-                    console.log('Gig Date:', gig.date); // Log the date to check its format
                     
                     // Format the date to remove the time portion
                     const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
@@ -90,14 +96,14 @@ const UserGigs = () => {
                         month: 'long', // Full month name
                         day: 'numeric', // Day of the month
                     });
-
+                    const formattedTime = formatTime(gig.time);
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
                             <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
-                            <p className="gig-info">Time: {gig.time}</p>
+                            <p className="gig-info">Time: {formattedTime}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert ? 'Yes' : 'No'}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
