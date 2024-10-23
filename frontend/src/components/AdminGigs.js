@@ -1,5 +1,4 @@
 // src/components/AdminGigs.js
-// src/components/AdminGigs.js
 import React, { useState, useEffect } from 'react';
 
 const AdminGigs = () => {
@@ -114,14 +113,6 @@ const AdminGigs = () => {
         }
     };
 
-    const formatGigDate = (dateString) => {
-        return new Date(dateString + 'T00:00:00').toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long', // Full month name
-            day: 'numeric' // Day of the month
-        });
-    };
-
     return (
         <div>
             <h1>Admin Gigs Page</h1>
@@ -220,22 +211,18 @@ const AdminGigs = () => {
                     </select>
                 </label>
                 <br />
-                <label></label>
                 <button type="submit">Add New Gig</button>
             </form>
 
             <h2>Current Gigs</h2>
             <ul>
                 {gigs.map((gig) => {
-                    // Format the date
-                    const formattedDate = formatGigDate(gig.date);
-                   
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
+                            <p className="gig-info">Date: {gig.date}</p> {/* Directly using gig.date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
@@ -247,7 +234,6 @@ const AdminGigs = () => {
                     );
                 })}
             </ul>
-    
 
             <h2>User List</h2>
             <ul>
