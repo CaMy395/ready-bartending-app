@@ -83,13 +83,20 @@ const UserGigs = () => {
             <ul>
                 {gigs.map((gig) => {
                     console.log('Gig Date:', gig.date); // Log the date to check its format
+                    
+                    // Format the date to remove the time portion
+                    const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long', // Full month name
+                        day: 'numeric', // Day of the month
+                    });
 
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {gig.date}</p> {/* Directly display gig.date */}
+                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert ? 'Yes' : 'No'}</p>
