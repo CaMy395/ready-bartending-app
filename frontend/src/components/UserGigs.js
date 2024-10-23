@@ -84,8 +84,9 @@ const UserGigs = () => {
                 {gigs.map((gig) => {
                     console.log('Gig Date:', gig.date); // Log the date to check its format
 
-                    // String Parsing as a workaround for invalid date issues
-                    const formattedDate = new Date(gig.date + 'T00:00:00').toLocaleDateString('en-US', {
+                    // Create a new date object from the gig date
+                    const dateObject = new Date(gig.date);
+                    const formattedDate = dateObject.toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long', // Full month name
                         day: 'numeric', // Day of the month
