@@ -2,11 +2,14 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import cors from 'cors';
-import path from 'path';  // Import path to handle static file serving
 import pkg from 'pg';
+import path from 'path';  // Import path to handle static file serving
+import { fileURLToPath } from 'url';  // Required for ES module __dirname
 import bcrypt from 'bcrypt';
-//import { dbConfig } from './config.js';
 
+// Define __filename and __dirname for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const { Pool } = pkg; // Using Pool for PostgreSQL
 
