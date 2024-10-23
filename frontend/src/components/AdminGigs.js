@@ -240,6 +240,7 @@ const AdminGigs = () => {
                             <p className="gig-info">Event Type: {gig.event_type}</p>
                             <p className="gig-info">Date: {formattedDate}</p> {/* Use the formatted date */}
                             <p className="gig-info">Time: {formattedTime}</p>
+                            <p className="gig-info">Duration: {gig.duration}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
