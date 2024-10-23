@@ -75,14 +75,11 @@ const UserGigs = () => {
         }
     };
 
-    // Helper function to format and parse date correctly
+    // Helper function to format and parse the date correctly
     const formatGigDate = (dateString) => {
-        const parsedDate = Date.parse(dateString); // Try parsing the date
-        if (isNaN(parsedDate)) {
-            console.error('Invalid Date:', dateString);
-            return 'Invalid Date'; // Return 'Invalid Date' if parsing fails
-        }
-        return new Date(parsedDate).toLocaleDateString('en-US', {
+        // Extract the date part only (YYYY-MM-DD) from ISO format
+        const datePart = dateString.split('T')[0]; 
+        return new Date(datePart).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
