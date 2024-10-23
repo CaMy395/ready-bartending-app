@@ -71,3 +71,9 @@
 .backup-button:hover {
   background-color: #45a049; /* Darker green */
 }
+
+.user-gigs-container {
+  background-color: black;
+  color: white; /* Change text color to ensure visibility */
+  padding: 20px; /* Add some padding */
+}

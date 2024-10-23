@@ -13,6 +13,7 @@ const AdminGigs = () => {
         gender: '',
         pay: '',
         confirmed: '',
+        needs_cert: '',
         staff_needed: '',
         claimed_by: '',
         backup_needed: '',
@@ -79,6 +80,7 @@ const AdminGigs = () => {
             position: newGig.position,
             gender: newGig.gender,
             pay: newGig.pay,
+            needs_cert: newGig.needs_cert ? 'yes' : 'no',
             confirmed: newGig.confirmed ? 'yes' : 'no',
             staff_needed: newGig.staff_needed,
             claimed_by: newGig.claimed_by ? [newGig.claimed_by] : [],
@@ -163,7 +165,16 @@ const AdminGigs = () => {
                 </label>
                 <br />
                 <label>
-                    Confirmed: 
+                Need Certification: 
+                    <select name="needs_cert" value={newGig.needs_cert} onChange={handleChange} required>
+                        <option value="">Select</option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>                
+                </label>
+                <br />
+                <label>
+                Confirmed: 
                     <select name="confirmed" value={newGig.confirmed} onChange={handleChange} required>
                         <option value="">Select</option>
                         <option value="yes">Yes</option>

@@ -77,7 +77,7 @@ const UserGigs = () => {
 
     // Render the gig list
     return (
-        <div>
+        <div className="user-gigs-container">
             <h2>Available Gigs</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <ul>
@@ -85,15 +85,23 @@ const UserGigs = () => {
                     // Determine if the user has claimed the gig or backup gig
                     const isClaimed = gig.claimed_usernames?.includes(username);
                     const isBackupClaimed = gig.backup_claimed_by?.includes(username);
+                    
+                    // Format the date
+                    const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long', // Full month name
+                        day: 'numeric', // Day of the month
+                    });
 
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position:{gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {gig.date}</p>
+                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
+                            <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
                             <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
                             <p className="gig-info">Backup Staff Needed: {gig.backup_needed}</p>
