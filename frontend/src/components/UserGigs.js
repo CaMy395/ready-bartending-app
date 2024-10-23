@@ -106,6 +106,7 @@ const UserGigs = () => {
                             <p className="gig-info">Time: {formattedTime}</p>
                             <p className="gig-info">Duration: {gig.duration}</p>
                             <p className="gig-info">Location: {gig.location}</p>
+                            <p className="gig-info">Pay: {gig.pay}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert ? 'Yes' : 'No'}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
                             <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
