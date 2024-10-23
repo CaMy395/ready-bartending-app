@@ -24,20 +24,20 @@ const App = () => {
 
     return (
         <Router>
-            <AppContent userRole={userRole} handleLogout={handleLogout} onLogin={handleLogin} /> {/* Pass handleLogin here */}
+            <AppContent userRole={userRole} handleLogout={handleLogout} onLogin={handleLogin} />
         </Router>
     );
 };
 
-const AppContent = ({ userRole, handleLogout, onLogin }) => { // Add onLogin here
+const AppContent = ({ userRole, handleLogout, onLogin }) => {
     const location = useLocation();
-    const hideHeader = location.pathname !== '/' && location.pathname !== '/login'; // Only show header on register and login pages
+    const hideHeader = location.pathname === '/' || location.pathname === '/login'; // Show header only on register and login pages
     const username = localStorage.getItem('username'); // Get the username from localStorage
 
     return (
         <div>
             {/* Conditionally render header and nav links only on Register and Login pages */}
-            {!hideHeader && (
+            {hideHeader && (
                 <>
                     <h1>Ready Gigs Center</h1>
                     <nav>
@@ -47,11 +47,11 @@ const AppContent = ({ userRole, handleLogout, onLogin }) => { // Add onLogin her
                 </>
             )}
 
-            {/* Render Logout button and Hi <username> on other pages */}
-            {hideHeader && userRole && (
+            {/* Render Logout button and "Hi <username>" on other pages */}
+            {!hideHeader && userRole && (
                 <nav style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                        {username && <span>Hi, {username}</span>} {/* Show Hi, <username> */}
+                        {username && <span>Hi, {username}</span>}
                     </div>
                     <button onClick={handleLogout}>Logout</button>
                 </nav>
@@ -60,13 +60,20 @@ const AppContent = ({ userRole, handleLogout, onLogin }) => { // Add onLogin her
             {/* Routes for different pages */}
             <Routes>
                 <Route path="/" element={<Register />} />
-                <Route path="/login" element={<Login onLogin={onLogin} />} /> {/* Pass onLogin here */}
-                
-                {/* Separate route for admin */}
+                <Route path="/login" element={<Login onLogin={onLogin} />} />
+
+                {/* Admin route */}
                 <Route path="/admin" element={userRole === 'admin' ? <AdminGigs /> : <Navigate to="/login" />} />
 
-                {/* Route for gigs, with role-based conditional rendering */}
-                <Route path="/gigs" element={userRole === 'admin' ? <AdminGigs /> : userRole === 'user' ? <UserGigs /> : <Navigate to="/login" />} />
+                {/* Gigs route with role-based conditional rendering */}
+                <Route path="/gigs" element={
+                    userRole === 'admin' ? <AdminGigs /> 
+                    : userRole === 'user' ? <UserGigs /> 
+                    : <Navigate to="/login" />
+                } />
+
+                {/* Catch-all route: Redirect any undefined routes to "/login" */}
+                <Route path="*" element={<Navigate to="/login" />} />
             </Routes>
         </div>
     );
