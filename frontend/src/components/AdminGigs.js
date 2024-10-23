@@ -227,14 +227,14 @@ const AdminGigs = () => {
             <ul>
                 {gigs.map((gig) => {
                     // Format the date
-                    const formattedDate = formatGigDate(gig.date);
+                    const formatedDate = formatGigDate(gig.date);
                    
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position:{gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
+                            <p className="gig-info">Date: {formatedDate}</p> {/* Use formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
