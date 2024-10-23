@@ -5,7 +5,7 @@ const UserList = () => {
 
     // Fetch the list of users from the backend
     useEffect(() => {
-        fetch('http://localhost:3001/users') // Change this to 3001
+        fetch('https:ready-bartending-gigs-portal.onrender.com') // Change this to 3001
             .then(response => response.json())
             .then(data => {
                 console.log('Fetched users:', data); // Debugging log
