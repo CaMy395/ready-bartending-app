@@ -89,12 +89,16 @@ const UserGigs = () => {
                     
                     // Format the date safely
                     const gigDate = new Date(gig.date); // Create a Date object
-                    const formattedDate = gigDate instanceof Date && !isNaN(gigDate) ? 
-                        gigDate.toLocaleDateString('en-US', {
+
+                    // Check for a valid date
+                    const isValidDate = gigDate instanceof Date && !isNaN(gigDate);
+                    const formattedDate = isValidDate 
+                        ? gigDate.toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long', // Full month name
                             day: 'numeric', // Day of the month
-                        }) : 'Invalid Date'; // Handle invalid date
+                        }) 
+                        : 'Invalid Date'; // Handle invalid date
 
                     return (
                         <li key={gig.id} className="gig-card">
@@ -104,7 +108,7 @@ const UserGigs = () => {
                             <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
-                            <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
+                            <p className="gig-info">Need Certificate: {gig.needs_cert ? 'Yes' : 'No'}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
                             <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
                             <p className="gig-info">Backup Staff Needed: {gig.backup_needed}</p>
