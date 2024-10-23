@@ -113,12 +113,6 @@ const AdminGigs = () => {
         }
     };
 
-    // Function to format the date
-    const formatDate = (dateString) => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        return new Date(dateString).toLocaleDateString(undefined, options);
-    };
-
     return (
         <div>
             <h1>Admin Gigs Page</h1>
@@ -223,12 +217,19 @@ const AdminGigs = () => {
             <h2>Current Gigs</h2>
             <ul>
                 {gigs.map((gig) => {
+                    // Format the date to remove the time portion
+                    const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long', // Full month name
+                        day: 'numeric', // Day of the month
+                    });
+
                     return (
                         <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {formatDate(gig.date)}</p> {/* Use the formatted date */}
+                            <p className="gig-info">Date: {formattedDate}</p> {/* Use the formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
