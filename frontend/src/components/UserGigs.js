@@ -75,6 +75,20 @@ const UserGigs = () => {
         }
     };
 
+    // Helper function to format and parse date correctly
+    const formatGigDate = (dateString) => {
+        const parsedDate = Date.parse(dateString); // Try parsing the date
+        if (isNaN(parsedDate)) {
+            console.error('Invalid Date:', dateString);
+            return 'Invalid Date'; // Return 'Invalid Date' if parsing fails
+        }
+        return new Date(parsedDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+    };
+
     // Render the gig list
     return (
         <div className="user-gigs-container">
@@ -87,12 +101,8 @@ const UserGigs = () => {
                     const isClaimed = gig.claimed_usernames?.includes(username);
                     const isBackupClaimed = gig.backup_claimed_by?.includes(username);
                     
-                    // Format the date with 'T00:00:00' for proper parsing
-                    const formattedDate = new Date(gig.date + 'T00:00:00').toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long', // Full month name
-                        day: 'numeric', // Day of the month
-                    });
+                    // Format the date using the new helper function
+                    const formattedDate = formatGigDate(gig.date);
 
                     return (
                         <li key={gig.id} className="gig-card">
