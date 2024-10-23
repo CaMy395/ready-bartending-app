@@ -219,14 +219,22 @@ const AdminGigs = () => {
             <h2>Current Gigs</h2>
             <ul>
                 {gigs.map((gig) => (
-                    <li key={gig.id}>
-                        {gig.client} - {gig.event_type} on {gig.date} at {gig.time} (Staff Needed: {gig.staff_needed}) 
-                        {gig.claimed_by && gig.claimed_by.length > 0 ? ` | Claimed By: ${gig.claimed_by.join(', ')}` : ' | Not Claimed'}
-                        {gig.backup_claimed_by && gig.backup_claimed_by.length > 0 ? ` | Backup Claimed By: ${gig.backup_claimed_by.join(', ')}` : ''} {/* Add this line */}
+                    <li key={gig.id} className="gig-card">
+                            <h3 className="gig-title">{gig.client}</h3>
+                            <p className="gig-info">Position:{gig.position}</p>
+                            <p className="gig-info">Event Type: {gig.event_type}</p>
+                            <p className="gig-info">Date: {formattedDate}</p> {/* Use formatted date */}
+                            <p className="gig-info">Time: {gig.time}</p>
+                            <p className="gig-info">Location: {gig.location}</p>
+                            <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
+                            <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
+                            <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
+                            <p className="gig-info">Backup Staff Needed: {gig.backup_needed}</p>
+                            <p className="gig-info">Backup Claimed: {gig.backup_claimed_by?.join(', ') || 'None'}</p>  
                     </li>
                 ))}
             </ul>
-
+    
 
             <h2>User List</h2>
             <ul>
