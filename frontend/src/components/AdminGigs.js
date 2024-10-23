@@ -113,6 +113,13 @@ const AdminGigs = () => {
         }
     };
     
+    const formatGigDate = (dateString) => {
+        return new Date(dateString + 'T00:00:00').toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long', // Full month name
+            day: 'numeric' // Day of the month
+        });
+    };
 
     return (
         <div>
@@ -218,8 +225,12 @@ const AdminGigs = () => {
 
             <h2>Current Gigs</h2>
             <ul>
-                {gigs.map((gig) => (
-                    <li key={gig.id} className="gig-card">
+                {gigs.map((gig) => {
+                    // Format the date
+                    const formattedDate = formatGigDate(gig.date);
+                   
+                    return (
+                        <li key={gig.id} className="gig-card">
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position:{gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
@@ -231,8 +242,9 @@ const AdminGigs = () => {
                             <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
                             <p className="gig-info">Backup Staff Needed: {gig.backup_needed}</p>
                             <p className="gig-info">Backup Claimed: {gig.backup_claimed_by?.join(', ') || 'None'}</p>  
-                    </li>
-                ))}
+                        </li>
+                    );
+                })}
             </ul>
     
 
