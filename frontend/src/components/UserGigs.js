@@ -87,7 +87,7 @@ const UserGigs = () => {
                     const isBackupClaimed = gig.backup_claimed_by?.includes(username);
                     
                     // Format the date
-const formattedDate = new Date(gig.date + 'T00:00:00Z').toLocaleDateString('en-US', {
+const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long', // Full month name
     day: 'numeric', // Day of the month
