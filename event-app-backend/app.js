@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import cors from 'cors';
+import path from 'path';  // Import path to handle static file serving
 import pkg from 'pg';
 import bcrypt from 'bcrypt';
 //import { dbConfig } from './config.js';
