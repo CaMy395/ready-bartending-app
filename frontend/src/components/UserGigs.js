@@ -56,7 +56,7 @@ const UserGigs = () => {
 
         try {
             const response = await fetch(`https://ready-bartending-gigs-portal.onrender.com/gigs/${gigId}/${action}`, {
-                method: 'PATCH', // Corrected method to PATCH
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username }), // Correctly send username
             });
@@ -75,17 +75,6 @@ const UserGigs = () => {
         }
     };
 
-    // Helper function to format and parse the date correctly
-    const formatGigDate = (dateString) => {
-        // Extract the date part only (YYYY-MM-DD) from ISO format
-        const datePart = dateString.split('T')[0]; 
-        return new Date(datePart).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-        });
-    };
-
     // Render the gig list
     return (
         <div className="user-gigs-container">
@@ -94,12 +83,13 @@ const UserGigs = () => {
             <ul>
                 {gigs.map((gig) => {
                     console.log('Gig Date:', gig.date); // Log the date to check its format
-                    // Determine if the user has claimed the gig or backup gig
-                    const isClaimed = gig.claimed_usernames?.includes(username);
-                    const isBackupClaimed = gig.backup_claimed_by?.includes(username);
                     
-                    // Format the date using the new helper function
-                    const formattedDate = formatGigDate(gig.date);
+                    // Format the date using string parsing with 'T00:00:00' appended
+                    const formattedDate = new Date(gig.date + 'T00:00:00').toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long', // Full month name
+                        day: 'numeric', // Day of the month
+                    });
 
                     return (
                         <li key={gig.id} className="gig-card">
