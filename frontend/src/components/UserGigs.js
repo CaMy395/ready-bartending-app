@@ -82,12 +82,13 @@ const UserGigs = () => {
             {error && <p style={{ color: 'red' }}>{error}</p>}
             <ul>
                 {gigs.map((gig) => {
+                    console.log('Gig Date:', gig.date); // Log the date to check its format
                     // Determine if the user has claimed the gig or backup gig
                     const isClaimed = gig.claimed_usernames?.includes(username);
                     const isBackupClaimed = gig.backup_claimed_by?.includes(username);
                     
                     // Format the date
-const formattedDate = new Date(gig.date).toLocaleDateString('en-US', {
+const formattedDate = new Date(gig.date + 'T00:00:00').toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long', // Full month name
     day: 'numeric', // Day of the month
