@@ -113,6 +113,12 @@ const AdminGigs = () => {
         }
     };
 
+    // Function to format the date
+    const formatDate = (dateString) => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
     return (
         <div>
             <h1>Admin Gigs Page</h1>
@@ -222,24 +228,15 @@ const AdminGigs = () => {
                             <h3 className="gig-title">{gig.client}</h3>
                             <p className="gig-info">Position: {gig.position}</p>
                             <p className="gig-info">Event Type: {gig.event_type}</p>
-                            <p className="gig-info">Date: {gig.date}</p> {/* Directly using gig.date */}
+                            <p className="gig-info">Date: {formatDate(gig.date)}</p> {/* Use the formatted date */}
                             <p className="gig-info">Time: {gig.time}</p>
                             <p className="gig-info">Location: {gig.location}</p>
                             <p className="gig-info">Need Certificate: {gig.needs_cert}</p>
                             <p className="gig-info">Staff Needed: {gig.staff_needed}</p>
-                            <p className="gig-info">Claimed Users: {gig.claimed_usernames?.join(', ') || 'None'}</p>
-                            <p className="gig-info">Backup Staff Needed: {gig.backup_needed}</p>
-                            <p className="gig-info">Backup Claimed: {gig.backup_claimed_by?.join(', ') || 'None'}</p>  
+                            <p className="gig-info">Claimed Users: {gig.claimed_by.join(', ')}</p> {/* Display claimed users */}
                         </li>
                     );
                 })}
-            </ul>
-
-            <h2>User List</h2>
-            <ul>
-                {users.map((user) => (
-                    <li key={user.id}>{user.username} ({user.email})</li> // Adjust based on your user data structure
-                ))}
             </ul>
         </div>
     );
