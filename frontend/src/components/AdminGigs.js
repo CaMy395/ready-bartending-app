@@ -1,6 +1,6 @@
 // src/components/AdminGigs.js
 import React, { useState, useEffect } from 'react';
-import UserList from './component/UserList'; // Import UserList component
+import UserList from './UserList'; // Import UserList component
 
 const formatTime = (timeString) => {
     const [hours, minutes] = timeString.split(':');
